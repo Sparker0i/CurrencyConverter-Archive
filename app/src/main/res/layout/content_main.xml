@@ -18,5 +18,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/card_external"
-        card:card_layout_resourceID="@layout/native_card_thumbnail_layout" />
+        card:card_layout_resourceID="@layout/native_card_layout" />
 </RelativeLayout>
