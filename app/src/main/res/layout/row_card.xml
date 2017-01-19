@@ -6,16 +6,58 @@
     android:padding="10dp">
 
     <ImageButton
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="125dp"
+        android:layout_height="72dp"
         android:id="@+id/imageButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
     <ImageButton
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="125dp"
+        android:layout_height="72dp"
         android:id="@+id/imageButton2"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_below="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton"
+        android:textAlignment="center" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/imageButton2"
+        android:layout_alignStart="@+id/imageButton2"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textView"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/editText"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/editText2"
+        android:layout_alignStart="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2"
+        android:textAlignment="center" />
 </RelativeLayout>
