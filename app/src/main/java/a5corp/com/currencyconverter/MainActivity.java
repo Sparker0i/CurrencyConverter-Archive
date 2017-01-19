@@ -9,6 +9,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardHeader;
+import it.gmariotti.cardslib.library.internal.CardThumbnail;
+import it.gmariotti.cardslib.library.view.CardView;
+import it.gmariotti.cardslib.library.view.CardViewNative;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +32,17 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        // Create a Card
+        Card card = new Card(this, R.layout.row_card);
+        CardHeader header = new CardHeader(this);
+        header.setTitle("Convert Currency Here");
+        card.setTitle("Simple card demo");
+        CardThumbnail thumb = new CardThumbnail(this);
+        thumb.setDrawableResource(R.mipmap.ic_launcher);
+        card.addCardThumbnail(thumb);
+        card.addCardHeader(header);
+        CardViewNative cardView = (CardViewNative) findViewById(R.id.carddemo_thumb_url);
+        cardView.setCard(card);
     }
 
     @Override
