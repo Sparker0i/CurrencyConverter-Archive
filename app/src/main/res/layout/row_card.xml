@@ -4,31 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/card_main_inner_simple_title"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
-    <EditText
-        android:layout_width="100sp"
-        android:layout_height="wrap_content"
-        android:id="@+id/edittext1"
-        android:layout_below="@id/card_main_inner_simple_title"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/card_main_inner_secondary_title"
-        android:text="CardsLib"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_below="@id/edittext1"/>
+    <ImageButton
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:id="@+id/imageButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_width="100sp"
-        android:layout_above="@+id/card_main_inner_secondary_title"
+    <ImageButton
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:id="@+id/imageButton2"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
-
 </RelativeLayout>
