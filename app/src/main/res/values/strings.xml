@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Currency Converter</string>
     <string name="action_settings">Settings</string>
+    <string name="title">Select Currency</string>
+    <string-array name="items">
+        <item>INR</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>PKR</item>
+    </string-array>
 </resources>

@@ -1,4 +1,4 @@
-package a5corp.com.currencyconverter;
+package com.corp.currencyconverter;
 
 import org.junit.Test;
 

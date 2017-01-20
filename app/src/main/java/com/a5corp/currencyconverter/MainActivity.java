@@ -1,4 +1,4 @@
-package a5corp.com.currencyconverter;
+package com.a5corp.currencyconverter;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.internal.CardThumbnail;
-import it.gmariotti.cardslib.library.view.CardView;
 import it.gmariotti.cardslib.library.view.CardViewNative;
 
 public class MainActivity extends AppCompatActivity {
