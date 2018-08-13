@@ -1,47 +1,84 @@
 package com.a5corp.currencyconverter;
 
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.internal.CardThumbnail;
-import it.gmariotti.cardslib.library.view.CardViewNative;
+import com.a5corp.currencyconverter.internet.JSONParser;
+import com.a5corp.currencyconverter.model.CurrencyDatabase;
+import com.a5corp.currencyconverter.model.CurrencyTable;
+
+import org.json.JSONObject;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String DATABASE_NAME = "db_currency";
+    private CurrencyDatabase currencyDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        final ArrayList<CurrencyTable> currencies = new ArrayList<>();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        currencyDatabase = Room.databaseBuilder(this , CurrencyDatabase.class , DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .build();
+
+        if (BuildConfig.DEBUG) {
+            try {
+                Class<?> debugDB = Class.forName("com.amitshekhar.DebugDB");
+                Method getAddressLog = debugDB.getMethod("getAddressLog");
+                Object value = getAddressLog.invoke(null);
+                Toast.makeText(this, (String) value, Toast.LENGTH_LONG).show();
+            } catch (Exception ignore) {
+
             }
-        });
-        // Create a Card
-        Card card = new Card(this, R.layout.row_card);
-        CardHeader header = new CardHeader(this);
-        header.setTitle("Convert Currency Here");
-        card.setTitle("Simple card demo");
-        CardThumbnail thumb = new CardThumbnail(this);
-        thumb.setDrawableResource(R.mipmap.ic_launcher);
-        card.addCardThumbnail(thumb);
-        card.addCardHeader(header);
-        CardViewNative cardView = (CardViewNative) findViewById(R.id.carddemo_thumb_url);
-        cardView.setCard(card);
+        }
+
+        try {
+            JSONObject results = new JSONParser(this).execute().get().getJSONObject("results");
+            Iterator<String> keys = results.keys();
+            while (keys.hasNext()) {
+                String key = keys.next();
+                JSONObject innerobject = results.getJSONObject(key);
+                Log.v("Category Key" , key);
+
+                String cname = innerobject.getString("currencyName");
+                String id = innerobject.getString("id");
+
+                CurrencyTable c = new CurrencyTable();
+                c.setCurrencyName(cname);
+                c.setId(id);
+                currencies.add(c);
+                Log.v("key = " + key , cname + " " + id);
+            }
+            System.out.println(results);
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    currencyDatabase.daoAccess().insertMultipleCurrencies(currencies);
+                }
+            }).start();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
